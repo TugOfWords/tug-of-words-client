@@ -2,7 +2,7 @@ import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../utility';
 
 const initialState = {
-  username: null,
+  uid: null,
   loading: false,
   error: null,
 };
@@ -42,7 +42,7 @@ const createUserFailure = (state, action) => updateObject(state, {
 const createUserSuccess = (state, action) => {
   const updatedState = {
     ...state,
-    username: action.username,
+    uid: action.uid,
     loading: false,
     error: null,
   };
@@ -59,7 +59,7 @@ const createUserSuccess = (state, action) => {
 const removeUser = (state) => {
   const updatedState = {
     ...state,
-    username: null,
+    uid: null,
     error: null,
   };
   return updateObject(state, updatedState);

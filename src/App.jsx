@@ -19,21 +19,32 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={MainMenu} />
-          <Redirect to="/" />
-        </Switch>
+        {this.props.isNewUser ?
+          <Switch>
+            <Route exact path="/" component={MainMenu} />
+            <Redirect to="/" />
+          </Switch> :
+          <Switch>
+            <Route exact path="/" render={() => <h1> Hello, {localStorage.getItem('username')} </h1>} />
+            <Redirect to="/" />
+          </Switch>
+        }
       </BrowserRouter>
     );
   }
 }
 
 App.propTypes = {
+  isNewUser: PropTypes.bool.isRequired,
   onCreateUserAuto: PropTypes.func.isRequired,
 };
+
+const mapStateToProps = state => ({
+  isNewUser: state.createUser.uid === null,
+});
 
 const mapDispatchToProps = dispatch => ({
   onCreateUserAuto: () => dispatch(actions.createUserAuto()),
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

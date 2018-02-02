@@ -1,3 +1,4 @@
+import shortid from 'shortid';
 import * as actionTypes from './actionTypes';
 import fire from '../fire';
 
@@ -24,14 +25,14 @@ export const createUserFailure = error => ({
 
 /**
  * Handle the CREATE_USER_SUCCESS action
- * @param {String} username
- *   the username entered by the user
+ * @param {String} uid
+ *   the unique userid entered by the user
  * @returns {Object}
  *   the data for CREATE_USER_SUCCESS
  */
-export const createUserSuccess = username => ({
+export const createUserSuccess = uid => ({
   type: actionTypes.CREATE_USER_SUCCESS,
-  username,
+  uid,
 });
 
 /**
@@ -40,6 +41,7 @@ export const createUserSuccess = username => ({
  *   the data for the REMOVE_USER action
  */
 export const removeUser = () => {
+  localStorage.removeItem('uid');
   localStorage.removeItem('username');
   return {
     type: actionTypes.REMOVE_USER,
@@ -53,10 +55,11 @@ export const removeUser = () => {
  */
 export const createUserAuto = () => (dispatch) => {
   const username = localStorage.getItem('username');
-  if (!username) {
+  const uid = localStorage.getItem('uid');
+  if (!username || !uid) {
     dispatch(removeUser());
   } else {
-    dispatch(createUserSuccess(username));
+    dispatch(createUserSuccess(uid));
   }
 };
 
@@ -67,15 +70,13 @@ export const createUserAuto = () => (dispatch) => {
  */
 export const createUser = username => (dispatch) => {
   dispatch(createUserStart());
-  try {
-    fire.ref(`users/${username}`).set({
-      username,
-    });
-
+  const uid = shortid.generate();
+  fire.ref(`users/${uid}`).set({
+    username,
+  }).then(() => {
+    localStorage.setItem('uid', uid);
     localStorage.setItem('username', username);
-    dispatch(createUserSuccess(username));
-  } catch (error) {
-    dispatch(createUserFailure(error));
-  }
+    dispatch(createUserSuccess(uid));
+  }).catch(e => dispatch(createUserFailure(e)));
 };
 
