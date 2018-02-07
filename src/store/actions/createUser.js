@@ -1,6 +1,6 @@
 import shortid from 'shortid';
 import * as actionTypes from './actionTypes';
-import fire from '../fire';
+import socket from '../socket-client';
 
 /**
  * Handle the CREATE_USER_START action
@@ -70,13 +70,12 @@ export const createUserAuto = () => (dispatch) => {
  */
 export const createUser = username => (dispatch) => {
   dispatch(createUserStart());
-  const uid = shortid.generate();
-  fire.ref(`users/${uid}`).set({
-    username,
-  }).then(() => {
-    localStorage.setItem('uid', uid);
-    localStorage.setItem('username', username);
-    dispatch(createUserSuccess(uid));
-  }).catch(e => dispatch(createUserFailure(e)));
+  const id = shortid.generate();
+  const userData = { id, username };
+  try {
+    socket.emit('createUser', userData);
+  } catch (e) {
+    dispatch(createUserFailure(e));
+  }
 };
 
