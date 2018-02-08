@@ -26,7 +26,7 @@ export const createUserFailure = error => ({
 /**
  * Handle the CREATE_USER_SUCCESS action
  * @param {String} uid
- *   the unique userid entered by the user
+ *   the unique userid that identifies the current user
  * @returns {Object}
  *   the data for CREATE_USER_SUCCESS
  */
