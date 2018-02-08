@@ -31,40 +31,60 @@ class MainMenu extends Component {
   );
 
   render() {
-    return (
-      <div align="center" style={{ marginTop: '50px' }} >
+    let form;
+    if (this.props.isNewUser) {
+      // main menu for users who have not created a username
+      form = (
         <Form>
           <h1> Enter a username to start playing </h1>
-
           <TextInput
             placeholder="Enter your username"
             onChange={e => this.updateUsername(e.target.value)}
           />
-
-          {/* Play Button */}
-          {this.renderButton('Play Now', 'green', this.submitUsername, '0px')}
+          {this.renderButton('Submit Name', 'green', this.submitUsername, '0px')}
           <br />
         </Form>
+      );
+    } else {
+      // main menu for the users who already have a username & uid
+      form = (
+        <Form>
+          <h1> Hello, {this.props.username}! </h1>
+          {this.renderButton('Play Now', 'green', () => console.log('Joining random lobby...'))}
+          <NewRoomDialog
+            trigger={this.renderButton}
+            content={<h1> Are you sure you want to create a room? </h1>}
+            confirm={this.props.onCreateRoom}
+            cancel={() => console.log('Canceled creation of new private room')}
+          />
+          <br />
+        </Form>
+      );
+    }
 
-        <NewRoomDialog
-          trigger={this.renderButton}
-          content={<h1> Are you sure you want to create a room? </h1>}
-          confirm={this.props.onCreateRoom}
-          cancel={() => console.log('Canceled creation of new private room')}
-        />
+    return (
+      <div align="center" style={{ marginTop: '50px' }} >
+        {form}
       </div>
     );
   }
 }
 
 MainMenu.propTypes = {
+  isNewUser: PropTypes.bool.isRequired,
+  username: PropTypes.string.isRequired,
   onCreateUser: PropTypes.func.isRequired,
   onCreateRoom: PropTypes.func.isRequired,
 };
+
+const mapStateToProps = state => ({
+  isNewUser: state.createUser.uid === null || state.createUser.username === null,
+  username: state.createUser.username || '',
+});
 
 const mapDispatchToProps = dispatch => ({
   onCreateUser: username => dispatch(actions.createUser(username)),
   onCreateRoom: () => dispatch(actions.createRoom()),
 });
 
-export default connect(null, mapDispatchToProps)(MainMenu);
+export default connect(mapStateToProps, mapDispatchToProps)(MainMenu);
