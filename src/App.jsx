@@ -19,16 +19,6 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        {/* {this.props.isNewUser ?
-          <Switch>
-            <Route exact path="/" component={MainMenu} />
-            <Redirect to="/" />
-          </Switch> :
-          <Switch>
-            <Route exact path="/" render={() => <h1> Hello, {localStorage.getItem('username')} </h1>} />
-            <Redirect to="/" />
-          </Switch>
-        } */}
         <Switch>
           <Route exact path="/" component={MainMenu} />
           <Redirect to="/" />
