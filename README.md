@@ -9,6 +9,10 @@ We will be using [yarn](https://yarnpkg.com/en/) rather than npm for dependency 
 `git clone <project_url>`
 - cd into the project directory, then install the dependencies
 `yarn install`
+#### Running the client
+- To start the development server run
+`yarn start`
+- Note that the server automatically refreshes when you make changes
 #### Adding a dependency
 - Always consult the team before adding a new dependency. If it is something small, you should write your own module instead of adding to the list of dependencies
 `yarn add <dependency_name>`
