@@ -44,14 +44,14 @@ class MainMenu extends Component {
           {/* Play Button */}
           {this.renderButton('Play Now', 'green', this.submitUsername, '0px')}
           <br />
-
-          <NewRoomDialog
-            trigger={this.renderButton}
-            content={<h1> Are you sure you want to create a room? </h1>}
-            confirm={this.props.onCreateRoom}
-            cancel={() => console.log('Canceled creation of new private room')}
-          />
         </Form>
+
+        <NewRoomDialog
+          trigger={this.renderButton}
+          content={<h1> Are you sure you want to create a room? </h1>}
+          confirm={this.props.onCreateRoom}
+          cancel={() => console.log('Canceled creation of new private room')}
+        />
       </div>
     );
   }
