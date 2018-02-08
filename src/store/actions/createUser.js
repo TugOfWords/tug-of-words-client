@@ -70,10 +70,13 @@ export const createUserAuto = () => (dispatch) => {
  */
 export const createUser = username => (dispatch) => {
   dispatch(createUserStart());
-  const id = shortid.generate();
-  const userData = { id, username };
+  const uid = shortid.generate();
+  const userData = { uid, username };
   try {
     socket.emit('createUser', userData);
+    localStorage.setItem('uid', uid);
+    localStorage.setItem('username', username);
+    dispatch(createUserSuccess(uid));
   } catch (e) {
     dispatch(createUserFailure(e));
   }
