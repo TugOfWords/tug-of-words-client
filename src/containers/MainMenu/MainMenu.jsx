@@ -24,6 +24,11 @@ class MainMenu extends Component {
     this.props.onCreateUser(this.state.username);
   }
 
+  resetUser = () => {
+    this.props.onRemoveUser();
+    window.location.href = '/';
+  }
+
   renderButton = (text, color, action, top) => (
     <Button basic color={color} onClick={action} style={{ marginTop: top || '10px' }}>
       {text}
@@ -51,19 +56,23 @@ class MainMenu extends Component {
         <Form>
           <h1> Hello, {this.props.username}! </h1>
           {this.renderButton('Play Now', 'green', () => console.log('Joining random lobby...'))}
+
+          <br />          
           <NewRoomDialog
             trigger={this.renderButton}
             content={<h1> Are you sure you want to create a room? </h1>}
             confirm={this.props.onCreateRoom}
             cancel={() => console.log('Canceled creation of new private room')}
           />
+
           <br />
+          {this.renderButton('Reset', 'red', this.resetUser)}
         </Form>
       );
     }
 
     return (
-      <div align="center" style={{ marginTop: '50px' }} >
+      <div align="center" style={{ marginTop: '15%' }} >
         {form}
       </div>
     );
@@ -85,6 +94,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onCreateUser: username => dispatch(actions.createUser(username)),
   onCreateRoom: () => dispatch(actions.createRoom()),
+  onRemoveUser: () => dispatch(actions.removeUser())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainMenu);
