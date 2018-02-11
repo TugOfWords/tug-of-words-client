@@ -34,11 +34,8 @@ TextInput.defaultProps = {
   type: 'text',
   disabled: false,
   hasError: false,
-<<<<<<< HEAD
   placeholder: '',
-=======
   default: '',
->>>>>>> 8fe517d0d236eecd6fac32b364daea7d3a07d4a5
   errorHeader: 'Error',
   errorMessage: 'Invalid input provided',
   onChange: () => null,
