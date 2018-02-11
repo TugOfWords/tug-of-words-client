@@ -31,6 +31,7 @@ TextInput.defaultProps = {
   label: '',
   type: 'text',
   hasError: false,
+  placeholder: '',
   errorHeader: 'Error',
   errorMessage: 'Invalid input provided',
   onChange: () => null,
@@ -38,7 +39,7 @@ TextInput.defaultProps = {
 
 TextInput.propTypes = {
   label: PropTypes.string,
-  placeholder: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
   type: PropTypes.string,
   hasError: PropTypes.bool,
   errorHeader: PropTypes.string,
