@@ -3,7 +3,7 @@ import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 // components
-import { Button, Header, Modal } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 import { MainMenu } from './MainMenu';
 import TextInput from '../../components/TextInput/TextInput';
 
