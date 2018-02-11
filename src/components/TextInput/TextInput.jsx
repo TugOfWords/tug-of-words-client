@@ -34,15 +34,16 @@ TextInput.defaultProps = {
   type: 'text',
   disabled: false,
   hasError: false,
+  placeholder: '',
   default: '',
   errorHeader: 'Error',
   errorMessage: 'Invalid input provided',
-  onChange: () => null,
+  onChange: () => { },
 };
 
 TextInput.propTypes = {
   label: PropTypes.string,
-  placeholder: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
   type: PropTypes.string,
   disabled: PropTypes.bool,
   default: PropTypes.string,
