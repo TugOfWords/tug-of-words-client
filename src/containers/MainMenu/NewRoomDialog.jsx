@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 // components
 import { Button, Header, Modal } from 'semantic-ui-react';
 
-class NewRoomDialog extends Component {
+export class NewRoomDialog extends Component {
   state = { open: false }
 
   toggleDialog = () => this.setState({ open: !this.state.open });

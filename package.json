@@ -24,7 +24,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "lint": "eslint . --ext .js",
+    "lint": "eslint . --ext .js .jsx",
     "eject": "react-scripts eject",
     "validate": "npm ls"
   },
