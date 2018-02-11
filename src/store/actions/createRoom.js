@@ -42,7 +42,7 @@ export const createRoomSuccess = rid => ({
  */
 export const createRoom = () => (dispatch) => {
   dispatch(createRoomStart());
-  const rid = shortid.generate();
+  const rid = encodeURIComponent(shortid.generate());
   const roomData = { rid };
   try {
     socket.emit('createRoom', roomData);
