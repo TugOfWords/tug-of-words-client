@@ -43,6 +43,7 @@ const createUserSuccess = (state, action) => {
   const updatedState = {
     ...state,
     uid: action.uid,
+    username: action.username,
     loading: false,
     error: null,
   };

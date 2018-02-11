@@ -26,13 +26,16 @@ export const createUserFailure = error => ({
 /**
  * Handle the CREATE_USER_SUCCESS action
  * @param {String} uid
- *   the unique userid entered by the user
+ *   the unique userid that identifies the current user
+ * @param {String} username
+ *   the name the user has chosen
  * @returns {Object}
  *   the data for CREATE_USER_SUCCESS
  */
-export const createUserSuccess = uid => ({
+export const createUserSuccess = (uid, username) => ({
   type: actionTypes.CREATE_USER_SUCCESS,
   uid,
+  username,
 });
 
 /**
@@ -43,6 +46,7 @@ export const createUserSuccess = uid => ({
 export const removeUser = () => {
   localStorage.removeItem('uid');
   localStorage.removeItem('username');
+  localStorage.removeItem('currentRoom');
   return {
     type: actionTypes.REMOVE_USER,
   };
@@ -59,7 +63,7 @@ export const createUserAuto = () => (dispatch) => {
   if (!username || !uid) {
     dispatch(removeUser());
   } else {
-    dispatch(createUserSuccess(uid));
+    dispatch(createUserSuccess(uid, username));
   }
 };
 
@@ -76,7 +80,7 @@ export const createUser = username => (dispatch) => {
     socket.emit('createUser', userData);
     localStorage.setItem('uid', uid);
     localStorage.setItem('username', username);
-    dispatch(createUserSuccess(uid));
+    dispatch(createUserSuccess(uid, username));
   } catch (e) {
     dispatch(createUserFailure(e));
   }

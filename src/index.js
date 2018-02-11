@@ -9,10 +9,12 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import createUser from './store/reducers/createUser';
+import createRoom from './store/reducers/createRoom';
 
 // add all new reducers here...
 const appReducer = combineReducers({
   createUser,
+  createRoom
 });
 
 /**
