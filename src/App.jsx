@@ -6,7 +6,7 @@ import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import * as actions from './store/actions/index';
 
 // containers
-import MainMenu from './containers/MainMenu/MainMenu';
+import Menu from './containers/MainMenu/MainMenu';
 import Lobby from './containers/Lobby/Lobby';
 import Game from './containers/Game/Game';
 
@@ -21,7 +21,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={MainMenu} />
+          <Route exact path="/" component={Menu} />
           <Route path="/lobby/:id" component={Lobby} />
           <Route path="/game/:id" component={Game} />
           <Redirect to="/" />

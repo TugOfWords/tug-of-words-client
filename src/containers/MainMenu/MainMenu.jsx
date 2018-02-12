@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 // components
 import { Button, Form } from 'semantic-ui-react';
 import TextInput from '../../components/TextInput/TextInput';
-import Dialog from './NewRoomDialog';
+import NewRoomModal from './NewRoomDialog';
 
 import * as actions from '../../store/actions/index';
 
@@ -61,7 +61,7 @@ export class MainMenu extends Component {
           {this.renderButton('Play Now', 'green', () => console.log('Joining random lobby...'))}
 
           <br />
-          <Dialog
+          <NewRoomModal
             trigger={this.renderButton}
             content={<h1> Are you sure you want to create a room? </h1>}
             confirm={this.createRoom}
@@ -82,8 +82,13 @@ export class MainMenu extends Component {
   }
 }
 
+MainMenu.defaultProps = {
+  uid: null,
+};
+
 MainMenu.propTypes = {
   isNewUser: PropTypes.bool.isRequired,
+  uid: PropTypes.string,
   username: PropTypes.string.isRequired,
   onCreateUser: PropTypes.func.isRequired,
   onCreateRoom: PropTypes.func.isRequired,
@@ -93,7 +98,7 @@ MainMenu.propTypes = {
 const mapStateToProps = state => ({
   isNewUser: state.createUser.uid === null || state.createUser.username === null,
   username: state.createUser.username || '',
-  uid: state.createUser.uid
+  uid: state.createUser.uid,
 });
 
 const mapDispatchToProps = dispatch => ({
