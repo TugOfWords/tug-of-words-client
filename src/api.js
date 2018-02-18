@@ -15,6 +15,7 @@ const api = {
   },
   rooms: {
     createRoom: payload => instance.post('/rooms/createRoom', payload).then(res => res.data),
+    joinRoom: payload => instance.post('/rooms/joinRoom', payload).then(res => res.data),
   },
 };
 

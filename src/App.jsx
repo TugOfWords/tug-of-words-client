@@ -8,7 +8,7 @@ import * as actions from './store/actions/index';
 // containers
 import Menu from './containers/MainMenu/MainMenu';
 import Lobby from './containers/Lobby/Lobby';
-import Game from './containers/Game/Game';
+// import Game from './containers/Game/Game';
 
 class App extends Component {
   state = {}
@@ -20,25 +20,29 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={Menu} />
-          <Route exact path="/lobby-test" component={Lobby} />
-          <Route path="/lobby/:id" component={Lobby} />
-          <Route path="/game/:id" component={Game} />
-          <Redirect to="/" />
-        </Switch>
-      </BrowserRouter>
+        {this.props.rid === '' ?
+          <Switch>
+            <Route exact path="/" component={Menu} />
+            <Redirect to="/" />
+          </Switch>
+          :
+          <Switch>
+            <Route exact path="/lobby/:id" component={Lobby} />
+            <Redirect to={`/lobby/${this.props.rid}`} />
+          </Switch>
+        }
+      </BrowserRouter >
     );
   }
 }
 
 App.propTypes = {
-  // isNewUser: PropTypes.bool.isRequired,
+  rid: PropTypes.string.isRequired,
   onCreateUserAuto: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-  isNewUser: state.user.uid === null,
+  rid: state.room.rid || '',
 });
 
 const mapDispatchToProps = dispatch => ({

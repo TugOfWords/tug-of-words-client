@@ -39,7 +39,16 @@ const roomActionFailure = (state, action) => updateObject(state, {
  * @returns {Object}
  *   the updated state
  */
-const createRoomSuccess = (state, action) => {
+const createRoomSuccess = (state) => {
+  const updatedState = {
+    ...state,
+    loading: false,
+    error: null,
+  };
+  return updateObject(state, updatedState);
+};
+
+const joinRoomSuccess = (state, action) => {
   const updatedState = {
     ...state,
     rid: action.rid,
@@ -66,6 +75,8 @@ const reducer = (state = initialState, action) => {
       return roomActionFailure(state, action);
     case actionTypes.CREATE_ROOM_SUCCESS:
       return createRoomSuccess(state, action);
+    case actionTypes.JOIN_ROOM_SUCCESS:
+      return joinRoomSuccess(state, action);
     default:
       return state;
   }
