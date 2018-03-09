@@ -52,9 +52,6 @@ class Lobby extends Component {
     return (
       <div align="center" style={{ marginTop: '25px' }}>
         <h1>Pregame Lobby</h1>
-        <Button basic color="red" onClick={this.leaveLobby} style={{ marginTop: '10px' }}>
-          Leave Lobby
-        </Button>
 
         {/* Team 1 */}
         <Card.Group itemsPerRow={2} style={{ marginLeft: '10%', marginRight: '10%', marginTop: '30px' }}>
@@ -75,6 +72,9 @@ class Lobby extends Component {
             disabled={this.props.teamNumber === 2}
           />
         </Card.Group>
+        <Button basic color="red" onClick={this.leaveLobby} style={{ marginTop: '30px' }}>
+          Leave Lobby
+        </Button>
       </div>
     );
   }
