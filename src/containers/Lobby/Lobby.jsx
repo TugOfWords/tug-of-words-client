@@ -55,6 +55,7 @@ class Lobby extends Component {
             players={this.state.t1}
             teamNumber={1}
             private={this.state.private}
+            disabled={this.props.teamNumber === 1}
           />
 
           {/* Team 2 */}
@@ -63,6 +64,7 @@ class Lobby extends Component {
             players={this.state.t2}
             teamNumber={2}
             private={this.state.private}
+            disabled={this.props.teamNumber === 2}
           />
         </Card.Group>
       </div>
@@ -74,6 +76,7 @@ Lobby.propTypes = {
   uid: PropTypes.string.isRequired,
   lid: PropTypes.string.isRequired,
   onJoinTeam: PropTypes.func.isRequired,
+  teamNumber: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = state => ({

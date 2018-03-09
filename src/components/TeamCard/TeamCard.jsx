@@ -26,7 +26,7 @@ const TeamCard = (props) => {
   const renderJoinButton = () => {
     if (!props.private) return null;
     return (
-      <Button basic color="green" content="Join Team" onClick={teamNumber => props.joinTeam(teamNumber)} />
+      <Button basic color="green" content="Join Team" onClick={teamNumber => props.joinTeam(teamNumber)} disabled={props.disabled} />
     );
   };
 
@@ -45,6 +45,7 @@ const TeamCard = (props) => {
 
 TeamCard.defaultProps = {
   private: false,
+  disabled: false,
 };
 
 /* eslint-disable */
@@ -53,6 +54,7 @@ TeamCard.propTypes = {
   players: PropTypes.arrayOf(PropTypes.string).isRequired,
   private: PropTypes.bool,
   joinTeam: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
 };
 
 export default TeamCard;

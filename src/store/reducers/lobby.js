@@ -3,7 +3,7 @@ import { updateObject } from '../utility';
 
 export const initialState = {
   lid: null,
-  teamNumber: null,
+  teamNumber: 0,
   loading: false,
   error: null,
 };
