@@ -8,4 +8,5 @@ export {
   joinLobbyAuto,
   joinLobbyOnly,
   joinTeam,
+  leaveLobby,
 } from './lobby';

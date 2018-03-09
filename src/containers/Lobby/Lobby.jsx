@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // components
-import { Card } from 'semantic-ui-react';
+import { Button, Card } from 'semantic-ui-react';
 import TeamCard from '../../components/TeamCard/TeamCard';
 
 // actions
@@ -39,6 +39,11 @@ class Lobby extends Component {
     return { t1: Object.values(t1), t2: Object.values(t2) };
   }
 
+  leaveLobby = () => {
+    this.props.onLeaveLobby();
+    window.location.href = '/';
+  }
+
   joinTeam = (teamNumber) => {
     this.props.onJoinTeam(this.props.lid, teamNumber, this.props.uid);
   }
@@ -47,6 +52,9 @@ class Lobby extends Component {
     return (
       <div align="center" style={{ marginTop: '25px' }}>
         <h1>Pregame Lobby</h1>
+        <Button basic color="red" onClick={this.leaveLobby} style={{ marginTop: '10px' }}>
+          Leave Lobby
+        </Button>
 
         {/* Team 1 */}
         <Card.Group itemsPerRow={2} style={{ marginLeft: '10%', marginRight: '10%', marginTop: '30px' }}>
@@ -77,6 +85,7 @@ Lobby.propTypes = {
   lid: PropTypes.string.isRequired,
   onJoinTeam: PropTypes.func.isRequired,
   teamNumber: PropTypes.number.isRequired,
+  onLeaveLobby: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -87,6 +96,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onJoinTeam: (lid, teamNumber, uid) => dispatch(actions.joinTeam(lid, teamNumber, uid)),
+  onLeaveLobby: () => dispatch(actions.leaveLobby()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Lobby);
