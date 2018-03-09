@@ -19,7 +19,7 @@ const appReducer = combineReducers({
 });
 
 /**
- * Reset the app state if the user is exiting the app
+ * Reset the app state if the user is exiting the app!!!
  * @param {Object} state
  *   the current global state of the app
  * @param {Object} action
